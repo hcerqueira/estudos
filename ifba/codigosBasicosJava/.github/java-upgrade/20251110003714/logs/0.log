@@ -1,0 +1,22 @@
+2025-11-10T00:37:14.674Z [INFO] ----------------------invoke generate_upgrade_plan_for_java_project----------------------
+2025-11-10T00:37:14.675Z [INFO] [Tool.invoke]({name: generate_upgrade_plan_for_java_project, input: {
+  "projectPath": "/home/hcerqueira/GitHub/estudos/ifba/codigosBasicosJava",
+  "targetJavaVersion": "21"
+}}).
+2025-11-10T00:37:14.676Z [INFO] [Plan.tryStartTask]({tool:generate_upgrade_plan_for_java_project, nextTask:{type:undefined, tool:undefined}}
+2025-11-10T00:37:14.676Z [INFO] [Plan.tryStartTask]: no next task, create new one.
+2025-11-10T00:37:14.676Z [INFO] [Plan.createTaskAtStart]({tool: generate_upgrade_plan_for_java_project, input: {
+  "projectPath": "/home/hcerqueira/GitHub/estudos/ifba/codigosBasicosJava",
+  "targetJavaVersion": "21",
+  "sessionId": "20251110003714"
+}}).
+2025-11-10T00:37:14.677Z [INFO] [Plan.tryStartTask]: starting task generatePlan
+2025-11-10T00:37:14.677Z [INFO] [Task.start](): Starting task generatePlan
+2025-11-10T00:37:14.678Z [INFO] [Task.start](1): Started task generatePlan
+2025-11-10T00:37:14.684Z [INFO] [Tool.invoke] validate GitHub Copilot license.
+2025-11-10T00:38:12.571Z [INFO] Copilot user info:undefined
+2025-11-10T00:38:12.573Z [WARN] "GitHub Copilot app modernization - upgrade for Java" and its tools are only available for GitHub Copilot "Pro", "Pro+", "Business" and "Enterprise" plans.
+2025-11-10T00:38:12.574Z [ERROR] [Tool.invoke] error occurs when invoking tool generate_upgrade_plan_for_java_project: UnsupportedCopilotPlanError: "GitHub Copilot app modernization - upgrade for Java" and its tools are only available for GitHub Copilot "Pro", "Pro+", "Business" and "Enterprise" plans.. Please upgrade your GitHub Copilot plan to use this feature or upgrading this project using other tools you prefer..
+2025-11-10T00:38:12.581Z [INFO] [Task.complete](1): Completing task generatePlan
+2025-11-10T00:38:12.587Z [INFO] ----------------------invoked generate_upgrade_plan_for_java_project----------------------
+2025-11-10T00:38:12.588Z [INFO] [Task.complete](1): Completed task generatePlan

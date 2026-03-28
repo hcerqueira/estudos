@@ -1,0 +1,21 @@
+using System;
+using System.Globalization;
+public class Program
+{
+	public static void Main()
+	{
+
+    	int numero, horas;
+		double valorHora, salario;
+
+		numero = int.Parse(Console.ReadLine());
+		horas = int.Parse(Console.ReadLine());
+		valorHora = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+
+		salario = horas * valorHora;
+
+		Console.WriteLine("NUMBER = "+numero);
+		Console.WriteLine("SALARY = U$ "+salario.ToString("F2", CultureInfo.InvariantCulture));
+
+	}
+}

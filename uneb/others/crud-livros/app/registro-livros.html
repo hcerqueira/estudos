@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="shortcut icon" type="image/png" href="assets/images/logo.png"/>
+	<link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="./styles/layout.css">
+	<title> CRUD </title>
+</head>
+<body>
+	<div class="wrapper">
+		<!-- Menu Navigation -->
+		<aside class="menu">
+			<nav class="menu-navigation">
+				<!-- Menu Navigation Logo -->
+				<a href="index.html">
+					<div class="menu-navigation-logo">
+						<img src="./assets/images/logo.png"
+						id="menu-navigation-logo-image"
+						alt="Logotipo da Sessão da Tarde">
+					</div>
+				</a>
+
+				<!-- Menu Navigation Items -->
+				<ul class="menu-navigation-items"></ul>
+			</nav>
+		</aside>
+
+		<!-- Page Wrapper -->
+		<div class="content-wrapper">
+			<!-- Breadcum Wrapper -->
+			<header class="breadcumb" id="header-breadcumb">
+				<svg width="32" height="32" class="toggle-menu" onclick="toggleMenu()"
+				xmlns="http://www.w3.org/2000/svg" onclick="toggleMenu()">
+				<g><path fill="#389137" id="svg_1" d="m4,10l24,0c1.104,0 2,-0.896 2,-2s-0.896,-2 -2,-2l-24,0c-1.104,0 -2,0.896 -2,2s0.896,2 2,2zm24,4l-24,0c-1.104,0 -2,0.896 -2,2s0.896,2 2,2l24,0c1.104,0 2,-0.896 2,-2s-0.896,-2 -2,-2zm0,8l-24,0c-1.104,0 -2,0.896 -2,2s0.896,2 2,2l24,0c1.104,0 2,-0.896 2,-2s-0.896,-2 -2,-2z"/></g>
+			</svg>
+
+			<ul class="breadcumb-items">
+				<li class="breadcumb-item">Sessão da Tarde</li>
+				<li class="breadcumb-item">Registro de Livros</li>
+			</ul>
+		</header>
+
+		<section class="main-content">
+			<form id="form-livro">
+				<div class="form-group">
+					<label for="inputTitle">Título</label>
+					<input type="text" class="form-control" required
+					id="inputTitle" aria-describedby="TitleHelp" placeholder="Título do Livro">
+				</div>
+
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label for="inputISBN">ISBN</label>
+						<input type="number" class="form-control" required
+						id="inputISBN" aria-describedby="ISBNHelp" placeholder="ISBN do Livro">
+						<small id="ISBNHelp" class="form-text text-muted">International Standart Book Number (ISBN) do livro</small>
+					</div>
+
+					<div class="form-group col-md-6">
+						<label for="inputYear">Ano</label>
+						<input type="number" class="form-control" max="9999" min="0" required
+						id="inputYear" aria-describedby="YearHelp" placeholder="Ano do Livro">
+					</div>
+				</div>
+
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label for="inputAuthor">Autor</label>
+						<input type="text" class="form-control" required
+						id="inputAuthor" aria-describedby="AuthorHelp" placeholder="Autor do Livro">
+					</div>
+
+					<div class="form-group col-md-6">
+						<label for="inputPublisher">Editora</label>
+						<input type="text" class="form-control" required
+						id="inputPublisher" aria-describedby="PublisherHelp" placeholder="Editora do Livro">
+					</div>
+				</div>
+
+				<button type="submit" class="btn btn-primary">Submit</button>
+			</form>
+		</section>
+	</div>
+</div>
+
+<script src="../node_modules/jquery/dist/jquery.min.js"></script>
+<script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="./scripts/script.js"></script>
+<script src="./scripts/registro-livros.js"></script>
+</body>
+</html>
