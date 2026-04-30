@@ -1,0 +1,11 @@
+# 1. Provisiona
+ansible-playbook site.yml
+
+# 2. Valida que subiu
+ansible all -m uri -a "url=http://172.16.101.9"
+
+# 3. Desfaz
+ansible-playbook teardown.yml
+
+# 4. Confirma que Apache sumiu
+ansible all -m service_facts | grep apache

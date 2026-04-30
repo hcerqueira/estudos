@@ -1,0 +1,21 @@
+---
+- name: Criar grupo www-data
+  group:
+    name: www-data
+    state: present
+
+- name: Criar usuário de deploy
+  user:
+    name: "{{ deploy_user }}"
+    shell: "{{ deploy_user_shell }}"
+    groups: "{{ deploy_user_groups }}"
+    append: yes
+    create_home: yes
+    state: present
+
+- name: Configurar sudoers do deployer
+  copy:
+    dest: "/etc/sudoers.d/{{ deploy_user }}"
+    content: "{{ deploy_user }} ALL=(ALL) NOPASSWD: /usr/bin/systemctl restart apache2, /usr/bin/systemctl reload apache2\n"
+    validate: /usr/sbin/visudo -cf %s
+    mode: "0440"

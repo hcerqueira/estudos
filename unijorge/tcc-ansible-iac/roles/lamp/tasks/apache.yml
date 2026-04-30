@@ -1,0 +1,19 @@
+---
+- name: Habilitar mod_rewrite
+  apache2_module:
+    name: rewrite
+    state: present
+  notify: Reiniciar Apache
+
+- name: Remover página padrão do Apache
+  file:
+    path: "{{ web_root }}/index.html"
+    state: absent
+
+- name: Permissão do web root
+  file:
+    path: "{{ web_root }}"
+    owner: www-data
+    group: www-data
+    mode: "0755"
+    state: directory

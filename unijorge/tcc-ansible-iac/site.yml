@@ -1,0 +1,27 @@
+---
+- name: Provisionar stack LAMP
+  hosts: webservers
+  become: yes
+  gather_facts: yes
+
+  pre_tasks:
+    - name: Verificar conectividade
+      ping:
+
+    - name: Registrar início
+      debug:
+        msg: "Iniciando em {{ inventory_hostname }} — {{ ansible_date_time.iso8601 }}"
+
+  roles:
+    - lamp
+
+  post_tasks:
+    - name: Verificar Apache na porta 80
+      wait_for:
+        host: "{{ ansible_default_ipv4.address }}"
+        port: 80
+        timeout: 15
+
+    - name: Registrar conclusão
+      debug:
+        msg: "Provisionamento concluído em {{ inventory_hostname }} — {{ ansible_date_time.iso8601 }}"

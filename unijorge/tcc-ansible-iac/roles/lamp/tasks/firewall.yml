@@ -1,0 +1,21 @@
+---
+- name: UFW - política padrão entrada negar
+  ufw:
+    policy: deny
+    direction: incoming
+
+- name: UFW - política padrão saída permitir
+  ufw:
+    policy: allow
+    direction: outgoing
+
+- name: UFW - permitir portas
+  ufw:
+    rule: allow
+    port: "{{ item }}"
+    proto: tcp
+  loop: "{{ ufw_allowed_ports }}"
+
+- name: Habilitar UFW
+  ufw:
+    state: enabled
