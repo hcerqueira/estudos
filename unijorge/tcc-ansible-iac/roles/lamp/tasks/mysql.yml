@@ -1,0 +1,42 @@
+---
+- name: Instalar python3-pymysql
+  apt:
+    name: python3-pymysql
+    state: present
+
+- name: Criar .my.cnf para autenticação root
+  copy:
+    dest: /root/.my.cnf
+    content: |
+      [client]
+      user=root
+      password={{ mysql_root_password }}
+    mode: "0600"
+  no_log: true
+
+- name: Criar banco de dados
+  mysql_db:
+    name: "{{ mysql_db_name }}"
+    state: present
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+
+- name: Criar usuário do banco
+  mysql_user:
+    name: "{{ mysql_db_user }}"
+    password: "{{ mysql_db_password }}"
+    priv: "{{ mysql_db_name }}.*:ALL"
+    host: localhost
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+    state: present
+  no_log: true
+
+- name: Remover usuários anônimos
+  mysql_user:
+    name: ""
+    host_all: yes
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+    state: absent
+  no_log: true

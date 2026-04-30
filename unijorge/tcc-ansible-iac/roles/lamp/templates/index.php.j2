@@ -1,0 +1,33 @@
+<?php
+$db_user = "{{ mysql_db_user }}";
+$db_pass = "{{ mysql_db_password }}";
+$db_name = "{{ mysql_db_name }}";
+$conn = new mysqli("localhost", $db_user, $db_pass, $db_name);
+$db_status = ($conn->connect_error) ? "Erro: " . $conn->connect_error : "Conectado";
+$conn->close();
+?>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ app_page_title }}</title>
+  <style>
+    body { font-family: Arial, sans-serif; background:#f4f4f4; margin:40px auto; max-width:700px; padding:20px; }
+    h1   { color:#2c3e50; }
+    .card { background:white; border-radius:8px; padding:20px; margin:16px 0; box-shadow:0 2px 4px rgba(0,0,0,.1); }
+  </style>
+</head>
+<body>
+  <h1>{{ app_page_title }}</h1>
+  <div class="card">
+    <p><b>Servidor:</b> {{ app_server_name }}</p>
+    <p><b>PHP:</b> <?= phpversion() ?></p>
+    <p><b>Apache:</b> <?= $_SERVER['SERVER_SOFTWARE'] ?></p>
+    <p><b>MySQL:</b> <?= $db_status ?></p>
+    <p><b>Provisionado em:</b> <?= date('d/m/Y H:i:s') ?></p>
+  </div>
+  <div class="card">
+    Provisionado automaticamente via <b>Ansible</b> — TCC 2026.
+  </div>
+</body>
+</html>

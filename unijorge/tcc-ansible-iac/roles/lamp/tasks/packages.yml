@@ -1,0 +1,27 @@
+---
+- name: Atualizar cache do apt
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: Instalar pacotes base
+  apt:
+    name: "{{ base_packages }}"
+    state: present
+
+- name: Instalar pacotes PHP
+  apt:
+    name: "{{ php_packages }}"
+    state: present
+
+- name: Garantir Apache rodando
+  service:
+    name: apache2
+    state: started
+    enabled: yes
+
+- name: Garantir MySQL rodando
+  service:
+    name: mysql
+    state: started
+    enabled: yes
