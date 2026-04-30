@@ -1,0 +1,7 @@
+---
+- import_tasks: users.yml
+- import_tasks: packages.yml
+- import_tasks: apache.yml
+- import_tasks: mysql.yml
+- import_tasks: firewall.yml
+- import_tasks: deploy.yml
