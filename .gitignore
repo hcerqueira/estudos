@@ -1,0 +1,29 @@
+# IDEs
+.idea/
+.vscode/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Node
+node_modules/
+dist/
+build/
+
+# Linux
+*.log
+*.tmp
+
+# Ansible
+*.retry
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.backup
+
+# OS
+.DS_Store
+Thumbs.db
