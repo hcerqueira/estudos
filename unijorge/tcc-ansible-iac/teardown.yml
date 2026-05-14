@@ -1,11 +1,129 @@
-# 1. Provisiona
-ansible-playbook site.yml
+---
+- name: Reverter provisionamento LAMP
+  hosts: webservers
+  become: yes
+  gather_facts: yes
 
-# 2. Valida que subiu
-ansible all -m uri -a "url=http://172.16.101.9"
+  vars:
+    deploy_user: deployer
+    web_root: /var/www/html
 
-# 3. Desfaz
-ansible-playbook teardown.yml
+  tasks:
 
-# 4. Confirma que Apache sumiu
-ansible all -m service_facts | grep apache
+    - name: "[deploy] Remover index.php"
+      file:
+        path: "{{ web_root }}/index.php"
+        state: absent
+
+    - name: "[mysql] Remover usuário da aplicação"
+      mysql_user:
+        name: "{{ mysql_db_user }}"
+        host: localhost
+        login_unix_socket: /var/run/mysqld/mysqld.sock
+        state: absent
+      ignore_errors: yes
+      no_log: true
+
+    - name: "[mysql] Remover banco de dados"
+      mysql_db:
+        name: "{{ mysql_db_name }}"
+        login_unix_socket: /var/run/mysqld/mysqld.sock
+        state: absent
+      ignore_errors: yes
+
+    - name: "[mysql] Remover .my.cnf"
+      file:
+        path: /root/.my.cnf
+        state: absent
+
+    - name: "[services] Parar e desabilitar Apache"
+      service:
+        name: apache2
+        state: stopped
+        enabled: no
+      ignore_errors: yes
+
+    - name: "[services] Parar e desabilitar MySQL"
+      service:
+        name: mysql
+        state: stopped
+        enabled: no
+      ignore_errors: yes
+
+    - name: "[packages] Remover stack LAMP"
+      apt:
+        name:
+          - apache2
+          - apache2-utils
+          - mysql-server
+          - mysql-client
+          - php
+          - php-mysql
+          - php-cli
+          - php-curl
+          - php-mbstring
+          - libapache2-mod-php
+          - python3-pymysql
+        state: absent
+        purge: yes
+        autoremove: yes
+
+    - name: "[packages] Limpar órfãos"
+      apt:
+        autoremove: yes
+        purge: yes
+
+    - name: "[files] Remover configs do Apache"
+      file:
+        path: /etc/apache2
+        state: absent
+
+    - name: "[files] Remover dados do MySQL"
+      file:
+        path: /var/lib/mysql
+        state: absent
+
+    - name: "[files] Remover logs do MySQL"
+      file:
+        path: /var/log/mysql
+        state: absent
+
+    - name: "[files] Recriar web root vazio"
+      file:
+        path: "{{ web_root }}"
+        state: directory
+        owner: www-data
+        group: www-data
+        mode: "0755"
+
+    - name: "[users] Remover sudoers do deployer"
+      file:
+        path: "/etc/sudoers.d/{{ deploy_user }}"
+        state: absent
+
+    - name: "[users] Remover usuário deployer"
+      user:
+        name: "{{ deploy_user }}"
+        state: absent
+        remove: yes
+
+    - name: "[firewall] Desabilitar UFW"
+      ufw:
+        state: disabled
+
+    - name: "[firewall] Resetar regras UFW"
+      ufw:
+        state: reset
+
+    - name: "[check] Coletar facts de serviços"
+      service_facts:
+
+    - name: "[check] Estado final dos serviços"
+      debug:
+        msg: |
+          Apache : {{ ansible_facts.services['apache2.service'].state | default('não encontrado') }}
+          MySQL  : {{ ansible_facts.services['mysql.service'].state   | default('não encontrado') }}
+
+    - name: "[check] Teardown concluído"
+      debug:
+        msg: "✅ Teardown concluído em {{ inventory_hostname }} — {{ ansible_date_time.iso8601 }}"
