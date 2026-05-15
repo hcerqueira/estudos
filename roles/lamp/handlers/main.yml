@@ -1,0 +1,21 @@
+---
+- name: Reiniciar Apache
+  systemd:
+    name: apache2
+    state: restarted
+    enabled: true
+
+- name: Recarregar Apache
+  systemd:
+    name: apache2
+    state: reloaded
+    enabled: true
+
+- name: Reiniciar MySQL
+  systemd:
+    name: mysql
+    state: restarted
+    enabled: true
+
+- name: Recarregar UFW
+  command: ufw reload

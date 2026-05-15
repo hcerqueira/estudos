@@ -1,2 +1,0 @@
-# CompraCertaWeb
- Supermercado web page.

@@ -1,0 +1,7 @@
+# MySQL - variáveis usadas no playbook
+mysql_root_password: "{{ vault_mysql_root_password }}"
+mysql_db_password: "{{ vault_mysql_db_password }}"
+
+# Banco
+mysql_db_name: appdb
+mysql_db_user: appuser

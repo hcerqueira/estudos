@@ -1,0 +1,44 @@
+deploy_user: deployer
+deploy_user_shell: /bin/bash
+deploy_user_groups: www-data
+web_root: /var/www/html
+
+php_packages:
+  - php
+  - php-mysql
+  - php-cli
+  - php-curl
+  - php-mbstring
+  - libapache2-mod-php
+
+base_packages:
+  - apache2
+  - mysql-server
+  - ufw
+  - btop
+  - nano
+  - net-tools
+  - curl
+  - wget
+  - git
+  - unzip
+  - rsync
+  - dnsutils
+  - tcpdump
+  - nmap
+  - sysstat
+  - jq
+  - tmux
+
+ufw_allowed_ports:
+  - "22/tcp"
+  - "80/tcp"
+  - "443/tcp"
+
+app_page_title: "TCC 2026 | Henrique Cerqueira | Infraestrutura como Código"
+app_server_name: "{{ inventory_hostname }}"
+app_server_ip:   "{{ ansible_default_ipv4.address }}"
+app_os:          "{{ ansible_distribution }} {{ ansible_distribution_version }}"
+app_kernel:      "{{ ansible_kernel }}"
+app_cpu_cores:   "{{ ansible_processor_vcpus }}"
+app_ram_mb:      "{{ ansible_memtotal_mb }}"

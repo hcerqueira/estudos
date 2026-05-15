@@ -1,0 +1,88 @@
+---
+- name: Instalar MySQL Server e dependências Python
+  apt:
+    name:
+      - mysql-server
+      - python3-pymysql
+    state: present
+    update_cache: yes
+
+- name: Garantir serviço MySQL rodando
+  service:
+    name: mysql
+    state: started
+    enabled: true
+
+- name: Aguardar MySQL ficar pronto
+  wait_for:
+    port: 3306
+    timeout: 30
+  when: not ansible_check_mode
+
+- name: Configurar senha root do MySQL (MySQL 8.0+)
+  shell: |
+    mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '{{ mysql_root_password }}';"
+    mysql -e "FLUSH PRIVILEGES;"
+  args:
+    executable: /bin/bash
+  register: set_root_password
+  failed_when: false
+  changed_when: "'ALTER USER' in set_root_password.stdout"
+  no_log: true
+  when: not ansible_check_mode
+
+- name: Criar .my.cnf para root
+  copy:
+    dest: /root/.my.cnf
+    owner: root
+    group: root
+    mode: "0600"
+    content: |
+      [client]
+      user=root
+      password={{ mysql_root_password }}
+  no_log: true
+  when: not ansible_check_mode
+
+- name: Criar banco de dados
+  community.mysql.mysql_db:
+    name: "{{ mysql_db_name }}"
+    state: present
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+  when: not ansible_check_mode
+
+- name: Criar usuário do banco
+  community.mysql.mysql_user:
+    name: "{{ mysql_db_user }}"
+    password: "{{ mysql_db_password }}"
+    priv: "{{ mysql_db_name }}.*:ALL"
+    host: localhost
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+    state: present
+  no_log: true
+  when: not ansible_check_mode
+
+- name: Remover usuários anônimos
+  community.mysql.mysql_user:
+    name: ""
+    host_all: true
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+    state: absent
+  no_log: true
+  when: not ansible_check_mode
+
+- name: Remover acesso root remoto
+  community.mysql.mysql_user:
+    name: root
+    host: "%"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+    state: absent
+  when: not ansible_check_mode

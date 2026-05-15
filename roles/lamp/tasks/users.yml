@@ -1,0 +1,28 @@
+---
+- name: Criar usuário de deploy
+  user:
+    name: "{{ deploy_user }}"
+    comment: "Usuário de deploy automatizado"
+    shell: "{{ deploy_user_shell }}"
+    groups: "{{ deploy_user_groups }}"
+    append: true
+    create_home: true
+    state: present
+
+- name: Configurar sudoers do deployer
+  copy:
+    dest: "/etc/sudoers.d/{{ deploy_user }}"
+    content: |
+      {{ deploy_user }} ALL=(ALL) NOPASSWD: /bin/systemctl restart apache2, /bin/systemctl reload apache2
+    validate: /usr/sbin/visudo -cf %s
+    owner: root
+    group: root
+    mode: "0440"
+
+- name: Garantir diretório .ssh
+  file:
+    path: "/home/{{ deploy_user }}/.ssh"
+    state: directory
+    owner: "{{ deploy_user }}"
+    group: "{{ deploy_user }}"
+    mode: "0700"

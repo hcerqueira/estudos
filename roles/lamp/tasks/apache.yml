@@ -1,0 +1,52 @@
+---
+- name: Garantir Apache instalado
+  apt:
+    name: apache2
+    state: present
+
+- name: Habilitar mod_rewrite
+  apache2_module:
+    name: rewrite
+    state: present
+  notify: Reiniciar Apache
+  when: not ansible_check_mode
+
+- name: Habilitar mod_headers
+  apache2_module:
+    name: headers
+    state: present
+  notify: Reiniciar Apache
+  when: not ansible_check_mode
+
+- name: Garantir Apache ativo
+  systemd:
+    name: apache2
+    state: started
+    enabled: true
+
+- name: Remover página padrão do Apache
+  file:
+    path: "{{ web_root }}/index.html"
+    state: absent
+
+- name: Garantir existência do web root
+  file:
+    path: "{{ web_root }}"
+    state: directory
+    owner: www-data
+    group: www-data
+    mode: "0755"
+
+- name: Ajustar permissões web root
+  file:
+    path: "{{ web_root }}"
+    owner: www-data
+    group: www-data
+    mode: "0755"
+    recurse: yes
+
+- name: Validar configuração do Apache
+  command: apache2ctl configtest
+  changed_when: false
+  when: not ansible_check_mode
+
