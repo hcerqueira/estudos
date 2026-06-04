@@ -1,29 +1,53 @@
-# IDEs
-.idea/
-.vscode/
+# Ansible vault password
+.vault_pass
 
-# Python
-__pycache__/
-*.pyc
-.venv/
-
-# Node
-node_modules/
-dist/
-build/
-
-# Linux
+# Compiled files
+*.class
+*.jar
+*.dex
+*.apk
+*.iml
 *.log
 *.tmp
+*.swp
+*.DS_Store
+Thumbs.db
 
-# Ansible
-*.retry
+# Build directories
+**/build/
+**/target/
+**/.gradle/
+**/out/
+**/__pycache__/
+**/node_modules/
+**/dist/
+**/bin/
 
-# Terraform
-.terraform/
-*.tfstate
-*.tfstate.backup
+# IDE files
+.idea/
+*.iml
+.vscode/
+.settings/
+.project
+.classpath
 
-# OS
+# OS metadata
 .DS_Store
 Thumbs.db
+desktop.ini
+
+# Secrets and keys
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Backup files
+*.bak
+*.backup
+
+# Large binaries
+*.zip
+*.tar.gz
+*.rar
+*.7z

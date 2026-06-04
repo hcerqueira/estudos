@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" type="image/png" href="assets/images/logo.png"/>
+	<link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="./styles/layout.css">
+	<link rel="stylesheet" href="./styles/lista-livros.css">
+	<title>Sessão da Tarde</title>
+</head>
+<body>
+	<div class="wrapper">
+		<!-- Menu Navigation -->
+		<aside class="menu">
+			<nav class="menu-navigation">
+				<!-- Menu Navigation Logo -->
+				<a href="index.html">
+					<div class="menu-navigation-logo">
+						<img src="./assets/images/logo.png"
+						id="menu-navigation-logo-image"
+						alt="Logotipo da Sessão da Tarde">
+					</div>
+				</a>
+
+				<!-- Menu Navigation Items -->
+				<ul class="menu-navigation-items"></ul>
+			</nav>
+		</aside>
+
+		<!-- Page Wrapper -->
+		<div class="content-wrapper">
+			<!-- Breadcum Wrapper -->
+			<header class="breadcumb" id="header-breadcumb">
+				<svg width="32" height="32" class="toggle-menu" onclick="toggleMenu()"
+					xmlns="http://www.w3.org/2000/svg" onclick="toggleMenu()">
+					<g><path fill="#389137" id="svg_1" d="m4,10l24,0c1.104,0 2,-0.896 2,-2s-0.896,-2 -2,-2l-24,0c-1.104,0 -2,0.896 -2,2s0.896,2 2,2zm24,4l-24,0c-1.104,0 -2,0.896 -2,2s0.896,2 2,2l24,0c1.104,0 2,-0.896 2,-2s-0.896,-2 -2,-2zm0,8l-24,0c-1.104,0 -2,0.896 -2,2s0.896,2 2,2l24,0c1.104,0 2,-0.896 2,-2s-0.896,-2 -2,-2z"/></g>
+				</svg>
+
+				<ul class="breadcumb-items">
+					<li class="breadcumb-item">Sessão da Tarde</li>
+					<li class="breadcumb-item">Lista de Livros</li>
+				</ul>
+			</header>
+
+			<section class="main-content">
+				<!-- Filter -->
+				<div class="input-group">
+					<input type="text"
+						id="filterInput"
+						class="form-control"
+						placeholder="Procurando algum livro específico?"
+						aria-label="Procurando algum livro específico?">
+					<div class="input-group-append">
+						<button class="btn btn-outline-secondary"
+							id="filterButton"
+							type="button">
+							Filtrar
+						</button>
+					</div>
+				</div>
+
+				<!-- Table of elements -->
+				<table class="table table-striped table-hover table-responsive-xl">
+					<thead>
+						<tr scope="row">
+							<th scope="col" width="6%">Código</th>
+							<th scope="col" width="8%">ISBN</th>
+							<th scope="col">Título</th>
+							<th scope="col" width="8%">Ano</th>
+							<th scope="col" width="20%">Autor</th>
+							<th scope="col" width="16%">Editora</th>
+							<th scope="col" width="10%">Ações</th>
+						</tr>
+					</thead>
+					<tbody id="table-body"></tbody>
+				</table>
+			</section>
+		</div>
+	</div>
+
+	<script src="../node_modules/jquery/dist/jquery.min.js"></script>
+	<script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="./scripts/script.js"></script>
+	<script src="./scripts/lista-livros.js"></script>
+</body>
+</html>
