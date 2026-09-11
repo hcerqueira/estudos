@@ -64,7 +64,7 @@ Manual}
 \author{Carlos Henrique Cerqueira Santos\inst{1}}
 \address{Sistema de Informação -- Centro Universitário Jorge Amado - UNIJORGE\\
   Salvador -- BA -- Brasil
-  \email{henriquecerqueira789@gmail.com}
+  \email{usuario@exemplo.local}
 }
 
 \begin{document}
@@ -335,9 +335,9 @@ A Tabela~\ref{tab:infra} apresenta as especificações das máquinas utilizadas.
     \toprule
     \textbf{VM} & \textbf{Função} & \textbf{CPU} & \textbf{RAM} & \textbf{IP} \\
     \midrule
-    ansible-controller & Controlador Ansible & 1 vCPU & 1,9 GiB & 172.16.101.5  \\
-    web01              & Nó gerenciado       & 1 vCPU & 1,9 GiB & 172.16.100.26 \\
-    web02              & Nó gerenciado       & 1 vCPU & 1,9 GiB & 172.16.100.27 \\
+    ansible-controller & Controlador Ansible & 1 vCPU & 1,9 GiB & 192.0.2.1  \\
+    web01              & Nó gerenciado       & 1 vCPU & 1,9 GiB & 192.0.2.10 \\
+    web02              & Nó gerenciado       & 1 vCPU & 1,9 GiB & 192.0.2.11 \\
     \bottomrule
   \end{tabular}
   \fonte{elaborado pelo autor (2026)}
@@ -412,9 +412,9 @@ descritos nos quadros a seguir.
   \label{quad:hosts}
   \begin{lstlisting}[language=bash]
 [webservers]
-web01  ansible_host=172.16.100.26  ansible_user=hcerqueira
+web01  ansible_host=192.0.2.10  ansible_user=user
        ansible_ssh_private_key_file=~/.ssh/id_ed25519
-web02  ansible_host=172.16.100.27  ansible_user=hcerqueira
+web02  ansible_host=192.0.2.11  ansible_user=user
        ansible_ssh_private_key_file=~/.ssh/id_ed25519
 
 [webservers:vars]
@@ -429,7 +429,7 @@ ansible_python_interpreter=/usr/bin/python3
   \begin{lstlisting}[language=bash]
 [defaults]
 inventory           = inventory/hosts.ini
-remote_user         = hcerqueira
+remote_user         = user
 private_key_file    = ~/.ssh/id_ed25519
 host_key_checking   = False
 stdout_callback     = yaml
