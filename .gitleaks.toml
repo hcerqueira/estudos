@@ -1,0 +1,6 @@
+[allowlist]
+description = "Exemplos da documentacao do gitleaks copiados para README de estudos"
+regexes = [
+  '''cafebabe:deadbeef''',
+  '''AKIAIMNOJVGFDXXXE4OA''',
+]
