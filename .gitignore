@@ -1,7 +1,9 @@
-# Ansible vault password
+# ===== Ansible =====
 .vault_pass
+*.vault_pass
+vault-password-file
 
-# Compiled files
+# ===== Compilados =====
 *.class
 *.jar
 *.dex
@@ -9,11 +11,8 @@
 *.iml
 *.log
 *.tmp
-*.swp
-*.DS_Store
-Thumbs.db
 
-# Build directories
+# ===== Build =====
 **/build/
 **/target/
 **/.gradle/
@@ -23,31 +22,18 @@ Thumbs.db
 **/dist/
 **/bin/
 
-# IDE files
+# ===== IDEs =====
 .idea/
-*.iml
 .vscode/
 .settings/
 .project
 .classpath
 
-# OS metadata
+# ===== Sistema =====
 .DS_Store
 Thumbs.db
 desktop.ini
 
-# Secrets and keys
-*.pem
-*.key
-*.p12
-*.pfx
-
-# Backup files
+# ===== Backups =====
 *.bak
 *.backup
-
-# Large binaries
-*.zip
-*.tar.gz
-*.rar
-*.7z
