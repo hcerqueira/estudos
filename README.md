@@ -1,12 +1,12 @@
 # 📚 Estudos
 
-Repositório com projetos e exercícios desenvolvidos ao longo da minha formação acadêmica — curso técnico em TI (IFBA), graduação em Sistemas de Informação (UNEB) e formação complementar (UniJorge). Organizado por instituição.
+Repositório com projetos e exercícios desenvolvidos ao longo da minha formação acadêmica — curso técnico em TI (IFBA), graduação em Sistemas de Informação (UNEB) formação (UniJorge), todos organizados por instituição, sem distinção de níveis. 
 
 > Este é um repositório de estudo: o código reflete o nível e o contexto de cada disciplina no momento em que foi escrito, não o padrão que sigo hoje em projetos profissionais. Para código de infraestrutura em produção, veja o trabalho documentado no meu [portfólio de infraestrutura](https://hcerqueira.github.io/pessoal/about.me).
 
 ## ⭐ Destaque
 
-**[`unijorge/tcc-ansible-iac`](./unijorge/tcc-ansible-iac)** — Trabalho de Conclusão de Curso: automação de provisionamento de ambiente LAMP (Linux, Apache, MySQL, PHP) com **Ansible**, usando roles reutilizáveis, inventário separado por ambiente, variáveis criptografadas com Ansible Vault e firewall configurado via playbook. É o projeto mais próximo do meu foco de carreira atual em automação de infraestrutura — vale começar por aqui.
+**[`unijorge/tcc-ansible-iac`](./unijorge/tcc-ansible-iac)** — Trabalho de Conclusão de Curso: automação de provisionamento de ambiente LAMP (Linux, Apache, MySQL, PHP) com **Ansible**, usando roles reutilizáveis, inventário separado por ambiente, variáveis criptografadas com Ansible Vault e firewall configurado via playbook. É o projeto mais próximo do meu foco de carreira atual.
 
 ## Índice por instituição
 
@@ -35,10 +35,8 @@ Repositório com projetos e exercícios desenvolvidos ao longo da minha formaç�
 ### UniJorge
 | Pasta | Conteúdo |
 |---|---|
-| `unijorge/tcc-ansible-iac` | **TCC — Infraestrutura como Código com Ansible** (ver destaque acima) |
+| `unijorge/tcc-ansible-iac` | **TCC — Infraestrutura como Código com Ansible** |
 | `unijorge/programacao-mobile` | App Android nativo (Kotlin) — calculadora de médias |
-| `unijorge/banco-de-dados-iii` | *(placeholder — sem conteúdo ainda)* |
+| `unijorge/banco-de-dados-iii` | *(placeholder)* |
 
 ---
-
-*Última reorganização: setembro/2026. Estrutura mantida por instituição para preservar o histórico de aprendizado; novos estudos técnicos (infraestrutura, automação, cloud) têm repositórios próprios e mais recentes.*
